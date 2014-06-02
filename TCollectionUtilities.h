@@ -18,6 +18,15 @@ private slots:
 
     void TestSort_data();
     void TestSort();
+
+    void TestForCont_data();
+    void TestForCont();
+
+    void AdvancedSorting_data();
+    void AdvancedSorting();
+
+    void CountNumbers_data();
+    void CountNumbers();
 };
 
 #endif // TCOLLECTIONUTILITIES_H

@@ -42,4 +42,31 @@ QList<int> CollectionUtilities::sort(const QList<int> &list)
     {
         return list;
     }
+
+
 }
+
+QList<int> CollectionUtilities::concatList(const QList<QList<int> > &lists)
+{
+    QList<int> result;
+    foreach(const QList<int> sublist, lists)
+    {
+        foreach(const int e, sublist)
+        {
+            result.append(e);
+        }
+    }
+    return result;
+
+}
+
+QList<int> CollectionUtilities::AdvancedSorting(const QList<QList<int> > &lists)
+{
+    return QList<int>();
+}
+
+MyHash CollectionUtilities::CountNums(const QList<int> &list)
+{
+    return MyHash();
+}
+
