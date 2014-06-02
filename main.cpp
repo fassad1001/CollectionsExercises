@@ -1,8 +1,13 @@
 #include <QCoreApplication>
 
+#include "TCollectionUtilities.h"
+
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    return a.exec();
+    TCollectionUtilities tCollectionUtilities;
+    QTest::qExec(&tCollectionUtilities);
+
+    return 0;
 }
