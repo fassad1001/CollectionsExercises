@@ -15,6 +15,9 @@ public:
 private slots:
     void TestListReverse_data();
     void TestListReverse();
+
+    void TestSort_data();
+    void TestSort();
 };
 
 #endif // TCOLLECTIONUTILITIES_H

@@ -10,6 +10,7 @@ public:
     CollectionUtilities();
 
     static QList<int> reverse(const QList<int> &list);
+    static QList<int> sort(const QList<int> &list);
 };
 
 #endif // COLLECTIONUTILITIES_H
