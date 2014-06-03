@@ -197,32 +197,32 @@ void TCollectionUtilities::CompareQlists()
 
     QCOMPARE(CollectionUtilities::CompareQlists_real(input),output);
 }
-
+    //задача 8
 void TCollectionUtilities::SortOfQLists_data()
 {
 
 }
-
+    //задача 8
 void TCollectionUtilities::SortOfQLists()
 {
 
 }
-
+    //задача 9
 void TCollectionUtilities::TableOfIncludes_data()
 {
 
 }
-
+    //задача 9
 void TCollectionUtilities::TableOfIncludes()
 {
 
 }
-
+ //задача 10
 void TCollectionUtilities::MaxUpNumbers_data()
 {
 
 }
-
+ //задача 10
 void TCollectionUtilities::MaxUpNumbers()
 {
 
