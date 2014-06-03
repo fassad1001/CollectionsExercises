@@ -88,15 +88,12 @@ QList<int> UnitedWeStrong (const QList<QList<int> > &lists)
 }
 int aIsThisBigger(QList<int> &a, QList<int> &b)
 {
-    //если последовательность а больше по размеру б то а больше б
-    //если последовательность а
-
     if (a.length() == b.length())
     {
         for(int i = 0 ; i<a.length() ; i++)
         {
             //1  2  3 больше чем 1  2
-            if (i == b.length()-1)
+            if (i == b.length()-2)
             {
                 if (a.at(i) == b.at(i))
                 {
@@ -117,7 +114,7 @@ int aIsThisBigger(QList<int> &a, QList<int> &b)
         }
         return -1;
     }
-    return -1;
+    return 0;
 }
 int HowItsGrow(QList<int> &a)
 {
@@ -179,52 +176,53 @@ MyHash CountNumbersFast(const QList<int> &list)
         }
     }
 }
-MyHash CountsIn(const QList<QList<int> > &list)
-{
-    int myNumCount = 0;
-    MyHash result;
-    int myNum = 0;
 
+MyHash2 CountsIn(const QList<QList<int> > &list)
+{
+    MyHash2 result;
+    QList<int> subresult;
+    //помнит набор цифр наличие которых надо проверять
+    QList<int> cont;
+    //выбрал от чего отталкиваться
+    foreach(QList<int> f,list)
+    {
+        if (f.count()>0)
+        {
+            cont = f;
+        }
+    }
+    //дополняю исходное цифрами которые есть в других строках
     foreach(QList<int> list0, list)
     {
         foreach (const int f,list0)
         {
+            if (cont.contains(f)==false)
+            {
+                cont.append(f);
+            }
         }
     }
+    //сортирую сборку
+    SimpleBubbleSotring(cont);
+    //собираю результат
+    int j=0;
+    for (int i = 0;i<cont.length();i++)
+    {
+        j=0;
+        foreach(QList<int> list0, list)
+        {
+            j++;
+            if (list0.contains(cont.at(i))==true)
+            {
+                subresult.append(j);
+            }
 
-//    if (list.count()>=1)
-//    {
-//        myNum = list.at(0);
-//        for(int i = 0;i<list.count();i++)
-//        {
-//            if (myNum == list.at(i))
-//            {
-//                myNumCount ++;
-//                qWarning()<<"num = "<<myNum<<";"<<"myNumCount = "<<myNumCount;
-//                if(i == (list.count()-1))
-//                {
-//                    qWarning()<<"insert:("<<myNum<<":"<<myNumCount<<")";
-//                    result.insert(myNum,myNumCount);
-//                }
-//            }
-//            else
-//            {
-//                result.insert(myNum,myNumCount);
-//                myNum = list.at(i);
-//                myNumCount = 1;
-//                qWarning()<<"insert:("<<myNum<<":"<<myNumCount<<")";
-//                result.insert(myNum,myNumCount);
-//                if(i == (list.count()-1))
-//                {
-//                    return result;
-//                }
-//            }
-//            if (i==(list.count()-1))
-//            {
-//                return result;
-//            }
-//        }
-//    }
+        }
+        result.insert(cont.at(i),subresult);
+        subresult.clear();
+    }
+    //возвращаю его
+    return result;
 }
 int FindMin(const QList<int> &r)
 {
@@ -242,19 +240,18 @@ int FindMin(const QList<int> &r)
     }
     return -999;
 }
-int FindMin2_0(const QList<QList<int> > &r)
-{
-    int min = FindMin(r.at(0));
-    foreach (QList<int> f, r)
-    {
-        if (FindMin(f)<min)
-        {
-            min = FindMin(f);
-        }
-    }
-    return min;
-}
 
+bool IsItReversionF(const QList<int> &a, const QList<int> &b)
+{
+    if (SimpleBubbleSotring(a)== SimpleBubbleSotring(b))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 //Функции для повторного использования (up)
 
 QList<int> CollectionUtilities::concatList(const QList<QList<int> > &lists)
@@ -280,4 +277,23 @@ MyHash CollectionUtilities::CountNums(const QList<int> &list)
 {
     return CountNumbersFast(list);
 }
+
+MyHash2 CollectionUtilities::TableOfIncl(const QList<QList<int> > &input)
+{
+    return CountsIn(input);
+}
+
+bool CollectionUtilities::ComparePermutation_real(const QList<QList<int> > &a_and_b)
+{
+    return IsItReversionF(a_and_b.at(0),a_and_b.at(1));
+}
+
+int CollectionUtilities::CompareQlists_real(const QList<QList<int> > &a_and_b)
+{
+    QList<int> fassad1 = a_and_b.at(0);
+    QList<int> fassad2 = a_and_b.at(1);
+    int result = aIsThisBigger(fassad1,fassad2);
+    return result;
+}
+
 

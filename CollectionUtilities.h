@@ -15,6 +15,18 @@ public:
 };
 Q_DECLARE_METATYPE(MyHash)
 
+class MyHash2 : public QHash< int, QList<int> >
+{
+public:
+   MyHash2& insertInc(const int key, const QList<int> value)
+   {
+       insert(key, value);
+       return *this;
+   }
+};
+Q_DECLARE_METATYPE(MyHash2)
+
+
 class CollectionUtilities
 {
 public:
@@ -25,6 +37,15 @@ public:
     static QList<int> concatList(const QList< QList<int> > &lists);
     static QList<int> AdvancedSorting(const QList< QList<int> > &lists);
     static MyHash CountNums(const QList<int> &list);
+    static MyHash2 TableOfIncl(const QList<QList<int> > &input);
+    //задача 5
+    static bool ComparePermutation_real (const QList<QList<int> > &a_and_b);
+    //задача 7
+    static int CompareQlists_real (const QList<QList<int> > &a_and_b);
+    //задача 9
+    static MyHash2 TableOfIncludes_real (const QList<QList<int> > &input);
+    //задача 10
+    static int MaxUpNumbers_real (const QList<int> &input);
 };
 
 #endif // COLLECTIONUTILITIES_H

@@ -38,7 +38,7 @@ void TCollectionUtilities::TestListReverse()
 
     QCOMPARE(CollectionUtilities::reverse(list), reversed);
 }
-
+//задача 1
 void TCollectionUtilities::TestSort_data()
 {
     QTest::addColumn< QList<int> >("list");
@@ -71,7 +71,7 @@ void TCollectionUtilities::TestSort_data()
     QTest::newRow("ten-elements-list") << (QList<int>() << 2 << 1 << 3 << 3 << 4 << 2 << 5 << 6 << 7 << 6)
                                        << (QList<int>() << 1 << 2 << 2 << 3 << 3 << 4 << 5 << 6 << 6 << 7);
 }
-
+//задача 1
 void TCollectionUtilities::TestSort()
 {
     QFETCH(QList<int>, list);
@@ -79,7 +79,7 @@ void TCollectionUtilities::TestSort()
 
     QCOMPARE(CollectionUtilities::sort(list), sorted);
 }
-
+//задача 2
 void TCollectionUtilities::TestForCont_data()
 {
     QTest::addColumn < QList< QList<int> > > ("listOfLists");
@@ -92,6 +92,7 @@ void TCollectionUtilities::TestForCont_data()
     QTest::newRow("nameoftest3") << (QList<QList<int> >() << (QList<int>()<<1<<2) << (QList<int>()<<3<<4) << (QList<int>()<<5<<6))
                                  << (QList<int>()<<1<<2<<3<<4<<5<<6);
 }
+//задача 2
 void TCollectionUtilities::TestForCont()
 {
     QFETCH(QList<QList<int> >, listOfLists);
@@ -100,7 +101,7 @@ void TCollectionUtilities::TestForCont()
     QCOMPARE(CollectionUtilities::concatList(listOfLists), expected);
 
 }
-
+//задача 3
 void TCollectionUtilities::AdvancedSorting_data()
 {
     QTest::addColumn < QList < QList<int> > > ("listOfLists");
@@ -109,6 +110,7 @@ void TCollectionUtilities::AdvancedSorting_data()
     QTest::newRow("AdvancedSorting_test_1") << (QList < QList<int> >()  << (QList<int>() <<2<<3<<1) << (QList<int>() <<4<<5))
                                    << (QList< int >() <<1<<2<<3<<4<<5);
 }
+//задача 3
 void TCollectionUtilities::AdvancedSorting()
 {
     QFETCH(QList< QList<int> >, listOfLists);
@@ -118,7 +120,7 @@ void TCollectionUtilities::AdvancedSorting()
 }
 
 
-
+//задача 4
 void TCollectionUtilities::CountNumbers_data()
 {
     QTest::addColumn < QList<int> > ("list");
@@ -141,6 +143,7 @@ void TCollectionUtilities::CountNumbers_data()
                                        .insertInc(2, 1));
 
     }
+//задача 4
 void TCollectionUtilities::CountNumbers()
 {
 
@@ -148,4 +151,79 @@ void TCollectionUtilities::CountNumbers()
     QFETCH(MyHash, expected);
 
     QCOMPARE(CollectionUtilities::CountNums(list), expected);
+}
+//задача 5
+void TCollectionUtilities::ComparePermutation_data()
+{
+    QTest::addColumn <QList<QList<int> > > ("a_and_b");
+    QTest::addColumn <bool > ("output");
+
+    QTest::newRow("ComparePermutation_test_1") <<(QList<QList<int> >() << (QList<int>()<<1) << (QList<int>()<<1))
+                                                  <<(true);
+    QTest::newRow("ComparePermutation_test_2") <<(QList<QList<int> >() << (QList<int>()<<1<<2<<10) << (QList<int>()<<1<<10<<2))
+                                                  <<(true);
+    QTest::newRow("ComparePermutation_test_2") <<(QList<QList<int> >() << (QList<int>()<<1<<2<<11) << (QList<int>()<<1<<10<<2))
+                                                  <<(false);
+
+}
+//задача 5
+void TCollectionUtilities::ComparePermutation()
+{
+    QFETCH(QList<QList<int> >,a_and_b);
+    QFETCH(bool, output);
+
+    QCOMPARE(CollectionUtilities::ComparePermutation_real(a_and_b),output);
+}
+//задача 7
+void TCollectionUtilities::CompareQlists_data()
+{\
+    QTest::addColumn <QList<QList<int> > > ("input");
+    QTest::addColumn <int > ("output");
+
+    QTest::newRow("CompareQlists_test_1") << (QList<QList<int> >() << (QList<int>()<<5) << (QList<int>()<<4))
+                                          <<(1);
+    QTest::newRow("CompareQlists_test_1") << (QList<QList<int> >() << (QList<int>()<<4) << (QList<int>()<<5))
+                                          <<(-1);
+    QTest::newRow("CompareQlists_test_3") << (QList<QList<int> >() << (QList<int>()<<5) << (QList<int>()<<5))
+                                          <<(0);
+    QTest::newRow("CompareQlists_test_3") << (QList<QList<int> >() << (QList<int>()<<5<<5<<6) << (QList<int>()<<5<<4<<7))
+                                          <<(1);
+}
+//задача 7
+void TCollectionUtilities::CompareQlists()
+{
+    QFETCH(QList<QList<int> >, input);
+    QFETCH(int ,output);
+
+    QCOMPARE(CollectionUtilities::CompareQlists_real(input),output);
+}
+
+void TCollectionUtilities::SortOfQLists_data()
+{
+
+}
+
+void TCollectionUtilities::SortOfQLists()
+{
+
+}
+
+void TCollectionUtilities::TableOfIncludes_data()
+{
+
+}
+
+void TCollectionUtilities::TableOfIncludes()
+{
+
+}
+
+void TCollectionUtilities::MaxUpNumbers_data()
+{
+
+}
+
+void TCollectionUtilities::MaxUpNumbers()
+{
+
 }
