@@ -42,6 +42,8 @@ public:
     static bool ComparePermutation_real (const QList<QList<int> > &a_and_b);
     //задача 7
     static int CompareQlists_real (const QList<QList<int> > &a_and_b);
+    //задача 8   
+    static QList<int> SortingListOfLists (const QList<QList<int> > &input);
     //задача 9
     static MyHash2 TableOfIncludes_real (const QList<QList<int> > &input);
     //задача 10
