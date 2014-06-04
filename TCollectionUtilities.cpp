@@ -200,12 +200,25 @@ void TCollectionUtilities::CompareQlists()
     //задача 8
 void TCollectionUtilities::SortOfQLists_data()
 {
+    QTest::addColumn <QList<QList<int> > > ("input");
+    QTest::addColumn <QList<int> > ("output");
 
+    QTest::newRow("SortOfQLists_test_1") << (QList<QList<int> >() << (QList<int>()<<5))
+                                          <<(QList<int>()<<5);
+
+    QTest::newRow("SortOfQLists_test_2") << (QList<QList<int> >() << (QList<int>()<<5) << (QList<int>()<<4))
+                                          <<(QList<int>()<<4<<5);
+                                         
+    QTest::newRow("SortOfQLists_test_2") << (QList<QList<int> >() << (QList<int>()<<6<<5) << (QList<int>()<<4))
+                                          <<(QList<int>()<<4<<5<<6);                                    
 }
     //задача 8
 void TCollectionUtilities::SortOfQLists()
 {
-
+    QFETCH(QList<QList<int> >, input);
+    QFETCH(QList<int> ,output);
+    
+    QCOMPARE(CollectionUtilities::SortingListOfLists(input),output);
 }
     //задача 9
 void TCollectionUtilities::TableOfIncludes_data()
