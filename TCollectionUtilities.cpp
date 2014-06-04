@@ -210,7 +210,10 @@ void TCollectionUtilities::SortOfQLists_data()
                                           <<(QList<int>()<<4<<5);
                                          
     QTest::newRow("SortOfQLists_test_2") << (QList<QList<int> >() << (QList<int>()<<6<<5) << (QList<int>()<<4))
-                                          <<(QList<int>()<<4<<5<<6);                                    
+                                          <<(QList<int>()<<4<<5<<6);
+
+    QTest::newRow("SortOfQLists_test_2") << (QList<QList<int> >())
+                                          <<(QList<int>());
 }
     //задача 8
 void TCollectionUtilities::SortOfQLists()
@@ -231,6 +234,12 @@ void TCollectionUtilities::TableOfIncludes_data()
                                                  .insertInc(1,QList<int>()<<1<<2)
                                                  .insertInc(2,QList<int>()<<1<<2)
                                                  .insertInc(3,QList<int>()<<1<<2));
+    QTest::newRow("TableOfIncludes_test_2")<<( (QList<QList<int> >()) << (QList<int>()<<5<<5<<5) <<  (QList<int>()<<5<<4<<5))
+                                              <<(MyHash2()
+                                                 .insertInc(5,QList<int>()<<1<<2)
+                                                 .insertInc(4,QList<int>()<<2));
+    QTest::newRow("TableOfIncludes_test_3")<<( QList<QList<int> >())
+                                              <<(MyHash2());
 }
     //задача 9
 void TCollectionUtilities::TableOfIncludes()
