@@ -223,20 +223,37 @@ void TCollectionUtilities::SortOfQLists()
     //задача 9
 void TCollectionUtilities::TableOfIncludes_data()
 {
+    QTest::addColumn<QList<QList<int> > >("input");
+    QTest::addColumn<MyHash2>("output");
 
+    QTest::newRow("TableOfIncludes_test_1")<<( (QList<QList<int> >()) << (QList<int>()<<1<<2<<3) <<  (QList<int>()<<1<<2<<3))
+                                              <<(MyHash2()
+                                                 .insertInc(1,QList<int>()<<1<<2)
+                                                 .insertInc(2,QList<int>()<<1<<2)
+                                                 .insertInc(3,QList<int>()<<1<<2));
 }
     //задача 9
 void TCollectionUtilities::TableOfIncludes()
 {
+    QFETCH(QList<QList<int> >, input);
+    QFETCH(MyHash2 ,output);
 
+    QCOMPARE(CollectionUtilities::TableOfIncludes_real(input),output);
 }
  //задача 10
 void TCollectionUtilities::MaxUpNumbers_data()
 {
+    QTest::addColumn<QList<int> >("input");
+    QTest::addColumn<int>("output");
 
+    QTest::newRow("MaxUpNumbers")<<(QList<int>()<<0<<1<<2<<3<<4<<5<<6<<8)
+                                   <<(7);
 }
  //задача 10
 void TCollectionUtilities::MaxUpNumbers()
 {
+    QFETCH(QList<int>, input);
+    QFETCH(int ,output);
 
+    QCOMPARE(CollectionUtilities::MaxUpNumbers_real(input),output);
 }

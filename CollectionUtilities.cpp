@@ -116,22 +116,49 @@ int aIsThisBigger(QList<int> &a, QList<int> &b)
     }
     return 0;
 }
+QList<int> getUniqueNums(QList<int> &a)
+{
+    QList<int> copy = a;
+    QList<int> CounterList;
+    int j=0;
+    CounterList.append(a.at(0));
+    //собираю список уникальных значений
+    for (int i =0;i<copy.length();i++)
+    {
+        if(copy.contains(CounterList.at(j)))
+        {
+            continue;
+        }
+        else
+        {
+            CounterList.append(copy.at(i));
+            j++;
+        }
+    }
+    return CounterList;
+}
+
 int HowItsGrow(QList<int> &a)
 {
     int IdealCounter = 0;
     int MaxCount = 0;
-    foreach(const int d, a)
+    QList<int> copy = a;
+    QList<int> CounterList= getUniqueNums(copy);
+    foreach(int tet,CounterList)
     {
-        if (d == IdealCounter)
+        foreach(const int d, a)
         {
-            IdealCounter ++;
-        }
-        else
-        {
-            if (IdealCounter>MaxCount)
+            if (d == IdealCounter)
             {
-                MaxCount = IdealCounter+1;
-                IdealCounter = 0;
+                IdealCounter ++;
+            }
+            else
+            {
+                if (IdealCounter>MaxCount)
+                {
+                    MaxCount = IdealCounter;
+                    IdealCounter = tet;
+                }
             }
         }
     }
@@ -300,4 +327,18 @@ QList<int> CollectionUtilities::SortingListOfLists (const QList<QList<int> > &in
 {
     return SimpleBubbleSotring(UnitedWeStrong(input));
 }
+//задача 9
+MyHash2 CollectionUtilities::TableOfIncludes_real(const QList<QList<int> > &input)
+{
+    return CountsIn(input);
+}
+//задача 10
+int CollectionUtilities::MaxUpNumbers_real(const QList<int> &input)
+{
+    QList<int> copy = input;
+    return HowItsGrow(copy);
+}
+
+
+
 
