@@ -295,5 +295,9 @@ int CollectionUtilities::CompareQlists_real(const QList<QList<int> > &a_and_b)
     int result = aIsThisBigger(fassad1,fassad2);
     return result;
 }
-
+//задача 8
+QList<int> CollectionUtilities::SortingListOfLists (const QList<QList<int> > &input);
+{
+    return SimpleBubbleSotring(UnitedWeStrong(input));
+}
 
