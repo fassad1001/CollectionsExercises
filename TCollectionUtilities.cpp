@@ -246,8 +246,16 @@ void TCollectionUtilities::MaxUpNumbers_data()
     QTest::addColumn<QList<int> >("input");
     QTest::addColumn<int>("output");
 
-    QTest::newRow("MaxUpNumbers")<<(QList<int>()<<0<<1<<2<<3<<4<<5<<6<<8)
+    QTest::newRow("MaxUpNumbers1")<<(QList<int>()<<0<<1<<2<<3<<4<<5<<6<<8)
                                    <<(7);
+    QTest::newRow("MaxUpNumbers2")<<(QList<int>())
+                                   <<(0);
+    QTest::newRow("MaxUpNumbers3")<<(QList<int>()<<5)
+                                   <<(1);
+    QTest::newRow("MaxUpNumbers4")<<(QList<int>()<<5<<6)
+                                   <<(2);
+    QTest::newRow("MaxUpNumbers5")<<(QList<int>()<<5<<6<<7<<5<<5)
+                                   <<(3);
 }
  //задача 10
 void TCollectionUtilities::MaxUpNumbers()

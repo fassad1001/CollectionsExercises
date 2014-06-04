@@ -123,9 +123,9 @@ QList<int> getUniqueNums(QList<int> &a)
     int j=0;
     CounterList.append(a.at(0));
     //собираю список уникальных значений
-    for (int i =0;i<copy.length();i++)
+    for (int i =1;i<copy.length();i++)
     {
-        if(copy.contains(CounterList.at(j)))
+        if(CounterList.contains(copy.at(i)))
         {
             continue;
         }
@@ -135,6 +135,7 @@ QList<int> getUniqueNums(QList<int> &a)
             j++;
         }
     }
+    qWarning()<<"fdsa"<<"="<<CounterList.length();
     return CounterList;
 }
 
@@ -144,26 +145,66 @@ int HowItsGrow(QList<int> &a)
     int MaxCount = 0;
     QList<int> copy = a;
     QList<int> CounterList= getUniqueNums(copy);
+    int iterator=0;
     foreach(int tet,CounterList)
     {
+        iterator=0;
+        qWarning()<<"начинаю считать от "<<tet;
+        IdealCounter = tet;
+        int Ticks = 0;
         foreach(const int d, a)
         {
+            iterator++;
+            qWarning()<<"значение цикла ="<<d<<"; сравниваю его с :"<<IdealCounter;
+
             if (d == IdealCounter)
             {
                 IdealCounter ++;
+                Ticks++;
+                qWarning()<<"совпало, теперь счётчик равен"<<Ticks;
+                if(iterator==a.length())
+                {
+                    if (Ticks>MaxCount)
+                    {
+                        MaxCount = Ticks;
+                        qWarning()<<">>обновляем значение максимума"<<Ticks;
+                        IdealCounter = tet;
+                        break;
+                    }
+                }
             }
             else
             {
-                if (IdealCounter>MaxCount)
+                if (Ticks>MaxCount)
                 {
-                    MaxCount = IdealCounter;
+                    MaxCount = Ticks;
+                    qWarning()<<">>обновляем значение максимума"<<Ticks;
                     IdealCounter = tet;
+                    break;
                 }
             }
         }
     }
+    qWarning()<<">>!!!в итоге получаем значение максимума"<<MaxCount;
     return MaxCount;
 }
+int HowItsGrowv2(QList<int> &a)
+{
+    QList<int> copy = a;
+    if (copy.length()==1)
+    {
+        return 1;
+    }
+    if (copy.length()>1)
+    {
+        return HowItsGrow(copy);
+    }
+    else
+    {
+        return 0;
+    }
+}
+
 MyHash CountNumbersFast(const QList<int> &list)
 {
     int myNumCount = 0;
@@ -336,7 +377,7 @@ MyHash2 CollectionUtilities::TableOfIncludes_real(const QList<QList<int> > &inpu
 int CollectionUtilities::MaxUpNumbers_real(const QList<int> &input)
 {
     QList<int> copy = input;
-    return HowItsGrow(copy);
+    return HowItsGrowv2(copy);
 }
 
 
