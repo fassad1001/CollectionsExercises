@@ -35,15 +35,14 @@ public:
     static QList<int> reverse(const QList<int> &list);
     static QList<int> sort(const QList<int> &list);
     static QList<int> concatList(const QList< QList<int> > &lists);
-    static QList<int> AdvancedSorting(const QList< QList<int> > &lists);
     static MyHash CountNums(const QList<int> &list);
     static MyHash2 TableOfIncl(const QList<QList<int> > &input);
     //задача 5
-    static bool ComparePermutation_real (const QList<QList<int> > &a_and_b);
+    static bool ComparePermutation_real (const QList<int> &a, const QList<int> &b);
     //задача 7
-    static int CompareQlists_real (const QList<QList<int> > &a_and_b);
+    static int CompareQlists_real (const QList<int> &a, const QList<int> &b);
     //задача 8   
-    static QList<int> SortingListOfLists (const QList<QList<int> > &input);
+    static QList<QList<int> > SortingListOfLists (const QList<QList<int> > &input);
     //задача 9
     static MyHash2 TableOfIncludes_real (const QList<QList<int> > &input);
     //задача 10

@@ -8,6 +8,11 @@ int main(int argc, char *argv[])
 
     TCollectionUtilities tCollectionUtilities;
     QTest::qExec(&tCollectionUtilities);
+    
+    class Stroka
+    {
+        
+    };
 
     return 0;
 }

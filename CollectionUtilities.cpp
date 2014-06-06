@@ -18,63 +18,13 @@ QList<int> CollectionUtilities::reverse(const QList<int> &list)
 
 QList<int> CollectionUtilities::sort(const QList<int> &list)
 {
-    QList<int> reversed = list;
-    if (list.length() > 0)
-    {
-        int key = 0;
-        int min = reversed.first();
-        for (int i=0; i<reversed.length();i++)
-        {
-            min = reversed.at(i);
-            for (int j=i; j<reversed.length();j++)
-            {
-                if(reversed.at(j)<=min)
-                {
-                    min = reversed.at(j);
-                    key = j;
-                }
-            }
-            reversed.swap(i, key);
-        }
-        return reversed;
-    }
-    else
-    {
-        return list;
-    }
-
-
+    QList<int> sorting = list;
+    qSort(sorting.begin(), sorting.end());
+    return sorting;
 }
 
 //Функции для повторного использования (down)
-QList<int> SimpleBubbleSotring (const QList<int> &list)
-{
-    QList<int> reversed = list;
-    if (list.length() > 0)
-    {
-        int key = 0;
-        int min = reversed.first();
-        for (int i=0; i<reversed.length();i++)
-        {
-            min = reversed.at(i);
-            for (int j=i; j<reversed.length();j++)
-            {
-                if(reversed.at(j)<=min)
-                {
-                    min = reversed.at(j);
-                    key = j;
-                }
-            }
-            reversed.swap(i, key);
-        }
-        return reversed;
-    }
-    else
-    {
-        return list;
-    }
-}
-QList<int> UnitedWeStrong (const QList<QList<int> > &lists)
+QList<int> concate (const QList<QList<int> > &lists)
 {
     QList<int> result;
     foreach(const QList<int> sublist, lists)
@@ -86,35 +36,50 @@ QList<int> UnitedWeStrong (const QList<QList<int> > &lists)
     }
     return result;
 }
-int aIsThisBigger(QList<int> &a, QList<int> &b)
+int compare(const QList<int> &a,const QList<int> &b)
 {
-    if (a.length() == b.length())
+    if (a==b)
     {
-        for(int i = 0 ; i<a.length() ; i++)
+        return 0;
+    }
+    //1 2 3 больше ...
+    if (b.isEmpty())
+    {
+        return 1;
+    }
+    //... меньше 1 2 3
+    if (a.isEmpty())
+    {
+        return -1;
+    }
+    //5  5  5 равно 5  5  5
+    //... равно ...
+    for(int i = 0 ; i<a.length() ; i++)
+    {
+        if (a.at(i)==b.at(i))
         {
-            //1  2  3 больше чем 1  2
-            if (i == b.length()-2)
-            {
-                if (a.at(i) == b.at(i))
-                {
-                    return 1;
-                }
-            }
-            //5  5  5 больше чем 5  4  5
-            if (a.at(i)> b.at(i))
+            //1 2 3 4 5 6 7 8 больше чем 1 2 3 4 5
+            if (i+1==b.length() && i+1<a.length())
             {
                 return 1;
             }
-
+            //1 2 3 4 5 меньше чем 1 2 3 4 5 6 7 8
+            if (i == a.length()-1 && i+1<b.length())
+            {
+                return -1;
+            }
         }
-        //5  5  5 равно 5  5  5
-        if (a == b)
+        //5  5  5 больше чем 5  4  5
+        if (a.at(i)> b.at(i))
         {
-            return 0;
+            return 1;
         }
-        return -1;
+
+        if(a.at(i)<b.at(i))
+        {
+            return -1;
+        }
     }
-    return 0;
 }
 QList<int> getUniqueNums(QList<int> &a)
 {
@@ -149,25 +114,20 @@ int HowItsGrow(QList<int> &a)
     foreach(int tet,CounterList)
     {
         iterator=0;
-        qWarning()<<"начинаю считать от "<<tet;
         IdealCounter = tet;
         int Ticks = 0;
         foreach(const int d, a)
         {
             iterator++;
-            qWarning()<<"значение цикла ="<<d<<"; сравниваю его с :"<<IdealCounter;
-
             if (d == IdealCounter)
             {
                 IdealCounter ++;
                 Ticks++;
-                qWarning()<<"совпало, теперь счётчик равен"<<Ticks;
                 if(iterator==a.length())
                 {
                     if (Ticks>MaxCount)
                     {
                         MaxCount = Ticks;
-                        qWarning()<<">>обновляем значение максимума"<<Ticks;
                         IdealCounter = tet;
                         break;
                     }
@@ -178,14 +138,12 @@ int HowItsGrow(QList<int> &a)
                 if (Ticks>MaxCount)
                 {
                     MaxCount = Ticks;
-                    qWarning()<<">>обновляем значение максимума"<<Ticks;
                     IdealCounter = tet;
                     break;
                 }
             }
         }
     }
-    qWarning()<<">>!!!в итоге получаем значение максимума"<<MaxCount;
     return MaxCount;
 }
 int HowItsGrowv2(QList<int> &a)
@@ -195,55 +153,41 @@ int HowItsGrowv2(QList<int> &a)
     {
         return 1;
     }
+    int count = 1;
+    int maxUp = 1;
     if (copy.length()>1)
     {
-        return HowItsGrow(copy);
+        for (int i =1 ; i <copy.length();i++)
+        {
+            if (a.at(i)>a.at(i-1))
+            {
+                count ++;
+                if (count>maxUp)
+                {
+                    maxUp=count;
+                }
+            }
+            else
+            {
+                if(count>maxUp)
+                {
+                    maxUp=count;
+                }
+                count =1;
+            }
+        }
+        return maxUp;
     }
     else
     {
         return 0;
     }
-}
-
-MyHash CountNumbersFast(const QList<int> &list)
-{
-    int myNumCount = 0;
-    MyHash result;
-    int myNum = 0;
-    if (list.count()>=1)
+    if (a.isEmpty())
     {
-        myNum = list.at(0);
-        for(int i = 0;i<list.count();i++)
-        {
-            if (myNum == list.at(i))
-            {
-                myNumCount ++;
-                qWarning()<<"num = "<<myNum<<";"<<"myNumCount = "<<myNumCount;
-                if(i == (list.count()-1))
-                {
-                    qWarning()<<"insert:("<<myNum<<":"<<myNumCount<<")";
-                    result.insert(myNum,myNumCount);
-                }
-            }
-            else
-            {
-                result.insert(myNum,myNumCount);
-                myNum = list.at(i);
-                myNumCount = 1;
-                qWarning()<<"insert:("<<myNum<<":"<<myNumCount<<")";
-                result.insert(myNum,myNumCount);
-                if(i == (list.count()-1))
-                {
-                    return result;
-                }
-            }
-            if (i==(list.count()-1))
-            {
-                return result;
-            }
-        }
+        return 0;
     }
 }
+
 
 MyHash2 CountsIn(const QList<QList<int> > &list)
 {
@@ -270,8 +214,6 @@ MyHash2 CountsIn(const QList<QList<int> > &list)
             }
         }
     }
-    //сортирую сборку
-    SimpleBubbleSotring(cont);
     //собираю результат
     int j=0;
     for (int i = 0;i<cont.length();i++)
@@ -309,9 +251,77 @@ int FindMin(const QList<int> &r)
     return -999;
 }
 
-bool IsItReversionF(const QList<int> &a, const QList<int> &b)
+//Функции для повторного использования (up)
+
+QList<int> CollectionUtilities::concatList(const QList<QList<int> > &lists)
 {
-    if (SimpleBubbleSotring(a)== SimpleBubbleSotring(b))
+    QList<int> result;
+    foreach(const QList<int> sublist, lists)
+    {
+        result<<sublist;
+    }
+    return result;
+
+}
+
+
+MyHash CollectionUtilities::CountNums(const QList<int> &list)
+{
+    int myNumCount = 0;
+    MyHash result;
+    int myNum = 0;
+    if (list.count()>=1)
+    {
+        myNum = list.at(0);
+        for(int i = 0;i<list.count();i++)
+        {
+            if (myNum == list.at(i))
+            {
+                myNumCount ++;
+                if(i == (list.count()-1))
+                {
+                    result.insert(myNum,myNumCount);
+                }
+            }
+            else
+            {
+                result.insert(myNum,myNumCount);
+                myNum = list.at(i);
+                myNumCount = 1;
+                result.insert(myNum,myNumCount);
+                if(i == (list.count()-1))
+                {
+                    return result;
+                }
+            }
+            if (i==(list.count()-1))
+            {
+                return result;
+            }
+        }
+    }
+}
+
+MyHash2 CollectionUtilities::TableOfIncl(const QList<QList<int> > &input)
+{
+    return CountsIn(input);
+}
+
+bool CollectionUtilities::ComparePermutation_real(const QList<int> &a, const QList<int> &b)
+{
+    if(a.length()!=b.length())
+    {
+        return false;
+    }
+    if (a.isEmpty() || b.isEmpty())
+    {
+        return false;
+    }
+    QList<int> sortA = a;
+    QList<int> sortB = b;
+    qSort(sortA.begin(),sortA.end());
+    qSort(sortB.begin(),sortB.end());
+    if (sortA == sortB)
     {
         return true;
     }
@@ -320,53 +330,41 @@ bool IsItReversionF(const QList<int> &a, const QList<int> &b)
         return false;
     }
 }
-//Функции для повторного использования (up)
 
-QList<int> CollectionUtilities::concatList(const QList<QList<int> > &lists)
+int CollectionUtilities::CompareQlists_real(const QList<int> &a, const QList<int> &b)
 {
-    QList<int> result;
-    foreach(const QList<int> sublist, lists)
-    {
-        foreach(const int e, sublist)
-        {
-            result.append(e);
-        }
-    }
-    return result;
-
-}
-
-QList<int> CollectionUtilities::AdvancedSorting(const QList<QList<int> > &lists)
-{
-    return SimpleBubbleSotring(UnitedWeStrong(lists));
-}
-
-MyHash CollectionUtilities::CountNums(const QList<int> &list)
-{
-    return CountNumbersFast(list);
-}
-
-MyHash2 CollectionUtilities::TableOfIncl(const QList<QList<int> > &input)
-{
-    return CountsIn(input);
-}
-
-bool CollectionUtilities::ComparePermutation_real(const QList<QList<int> > &a_and_b)
-{
-    return IsItReversionF(a_and_b.at(0),a_and_b.at(1));
-}
-
-int CollectionUtilities::CompareQlists_real(const QList<QList<int> > &a_and_b)
-{
-    QList<int> fassad1 = a_and_b.at(0);
-    QList<int> fassad2 = a_and_b.at(1);
-    int result = aIsThisBigger(fassad1,fassad2);
+    QList<int> fassad1 = a;
+    QList<int> fassad2 = b;
+    int result = compare(fassad1,fassad2);
     return result;
 }
 //задача 8
-QList<int> CollectionUtilities::SortingListOfLists (const QList<QList<int> > &input)
+QList<QList<int> > CollectionUtilities::SortingListOfLists (const QList<QList<int> > &input)
 {
-    return SimpleBubbleSotring(UnitedWeStrong(input));
+    QList<QList<int> > reversed = input;
+    if (input.length() > 0)
+    {
+        int key = 0;
+        QList<int> min = reversed.first();
+        for (int i=0; i<reversed.length();i++)
+        {
+            min = reversed.at(i);
+            for (int j=i+1; j<reversed.length();j++)
+            {
+                if((compare(reversed.at(j),min))==(-1))
+                {
+                    min = reversed.at(j);
+                    key = j;
+                    reversed.swap(i, key);
+                }
+            }
+        }
+        return reversed;
+    }
+    else
+    {
+        return reversed;
+    }
 }
 //задача 9
 MyHash2 CollectionUtilities::TableOfIncludes_real(const QList<QList<int> > &input)

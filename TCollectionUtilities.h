@@ -22,8 +22,6 @@ private slots:
     void TestForCont_data();
     void TestForCont();
     //задача 3
-    void AdvancedSorting_data();
-    void AdvancedSorting();
     //задача 4
     void CountNumbers_data();
     void CountNumbers();
