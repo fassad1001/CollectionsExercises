@@ -77,7 +77,7 @@ MyHash2 CollectionUtilities::TableOfIncl(const QList<QList<int> > &input)
     return CountsIn(input);
 }
 
-bool CollectionUtilities::ComparePermutation_real(const QList<int> &a, const QList<int> &b)
+bool CollectionUtilities::TestComparePermutation(const QList<int> &a, const QList<int> &b)
 {
     if(a.length()!=b.length())
     {
@@ -101,7 +101,7 @@ bool CollectionUtilities::ComparePermutation_real(const QList<int> &a, const QLi
     }
 }
 
-int CollectionUtilities::CompareQlists_real(const QList<int> &a, const QList<int> &b)
+int CollectionUtilities::TestCompareQlists(const QList<int> &a, const QList<int> &b)
 {
     QList<int> fassad1 = a;
     QList<int> fassad2 = b;
@@ -137,12 +137,12 @@ QList<QList<int> > CollectionUtilities::SortingListOfLists (const QList<QList<in
     }
 }
 //задача 9
-MyHash2 CollectionUtilities::TableOfIncludes_real(const QList<QList<int> > &input)
+MyHash2 CollectionUtilities::TestTableOfIncludes(const QList<QList<int> > &input)
 {
     return CountsIn(input);
 }
 //задача 10
-int CollectionUtilities::MaxUpNumbers_real(const QList<int> &input)
+int CollectionUtilities::TestMaxUpNumbers(const QList<int> &input)
 {
     QList<int> copy = input;
     return HowItsGrowv2(copy);

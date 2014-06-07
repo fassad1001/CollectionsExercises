@@ -23,23 +23,23 @@ private slots:
     void TestForCont();
     //задача 3
     //задача 4
-    void CountNumbers_data();
-    void CountNumbers();
+    void TestCountNumbers_data();
+    void TestCountNumbers();
     //задача 5
-    void ComparePermutation_data();
-    void ComparePermutation();
+    void TestComparePermutation_data();
+    void TestComparePermutation();
     //задача 7
-    void CompareQlists_data();
-    void CompareQlists();
+    void TestCompareQlists_data();
+    void TestCompareQlists();
     //задача 8
-    void SortOfQLists_data();
-    void SortOfQLists();
+    void TestSortOfQLists_data();
+    void TestSortOfQLists();
     //задача 9
-    void TableOfIncludes_data();
-    void TableOfIncludes();
+    void TestTableOfIncludes_data();
+    void TestTableOfIncludes();
     //задача 10
-    void MaxUpNumbers_data();
-    void MaxUpNumbers();
+    void TestMaxUpNumbers_data();
+    void TestMaxUpNumbers();
 };
 
 #endif // TCOLLECTIONUTILITIES_H

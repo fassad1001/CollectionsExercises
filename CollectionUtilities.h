@@ -38,15 +38,15 @@ public:
     static MyHash CountNums(const QList<int> &list);
     static MyHash2 TableOfIncl(const QList<QList<int> > &input);
     //задача 5
-    static bool ComparePermutation_real (const QList<int> &a, const QList<int> &b);
+    static bool TestComparePermutation (const QList<int> &a, const QList<int> &b);
     //задача 7
-    static int CompareQlists_real (const QList<int> &a, const QList<int> &b);
+    static int TestCompareQlists (const QList<int> &a, const QList<int> &b);
     //задача 8   
     static QList<QList<int> > SortingListOfLists (const QList<QList<int> > &input);
     //задача 9
-    static MyHash2 TableOfIncludes_real (const QList<QList<int> > &input);
+    static MyHash2 TestTableOfIncludes (const QList<QList<int> > &input);
     //задача 10
-    static int MaxUpNumbers_real (const QList<int> &input);
+    static int TestMaxUpNumbers (const QList<int> &input);
 };
 
 #endif // COLLECTIONUTILITIES_H
